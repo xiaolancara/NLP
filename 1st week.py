@@ -7,7 +7,7 @@ from nltk.tokenize import PunktSentenceTokenizer
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import gutenberg, wordnet
 
-example_text = "Hello Mr. Smith, how are you doing today? The weather is great and python us awesome. The sky is pinkish-blue. You should not eat cardboard."
+example_text = "Hello Mr. Smith, how are you doing today? The weather is great and python is awesome. The sky is pinkish-blue. You should not eat cardboard."
 # print(sent_tokenize(example_text)) # split to sentences
 # print(word_tokenize(example_text)) # split to words
 
