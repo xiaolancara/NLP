@@ -1,3 +1,9 @@
+"""
+Reference:
+1-10 episodes tutorial videos
+https://www.youtube.com/watch?v=FLZvOKSCkxY&list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL&index=1&ab_channel=sentdex
+"""
+
 import nltk
 from nltk import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
