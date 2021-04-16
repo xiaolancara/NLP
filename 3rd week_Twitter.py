@@ -1,7 +1,6 @@
 import nltk
 import random
 from nltk import word_tokenize
-from nltk.corpus import movie_reviews
 import pickle
 from nltk.classify.scikitlearn import SklearnClassifier
 from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
@@ -68,11 +67,11 @@ testing_set = featuresets[10000:]
 # pickle.dump(classifier, save_classifier)
 # save_classifier.close()
 
-classifier_f = open("Twitter_naivebayes.pickle","rb")
-classifier = pickle.load(classifier_f)
+classifier_f = open("pickled_algos/Twitter_naivebayes.pickle","rb")
+Naivebayes_classifier = pickle.load(classifier_f)
 classifier_f.close()
 
-print("Naive Bayes Algo accuracy", (nltk.classify.accuracy(classifier, testing_set))*100)
+print("Naive Bayes Algo accuracy", (nltk.classify.accuracy(Naivebayes_classifier, testing_set))*100)
 classifier.show_most_informative_features(15)
 
 """
@@ -82,35 +81,17 @@ MNB_classifier = SklearnClassifier(MultinomialNB())
 MNB_classifier.train(training_set)
 print("MNB_classifier accuracy", (nltk.classify.accuracy(MNB_classifier, testing_set))*100)
 
-# GaussianNB_classifier = SklearnClassifier(GaussianNB())
-# GaussianNB_classifier.train(training_set)
-# print("GaussianNB_classifier accuracy", (nltk.classify.accuracy(GaussianNB_classifier, testing_set))*100)
-
 BernoulliNB_classifier = SklearnClassifier(BernoulliNB())
 BernoulliNB_classifier.train(training_set)
 print("BernoulliNB_classifier accuracy", (nltk.classify.accuracy(BernoulliNB_classifier, testing_set))*100)
-
-# LogisticRegression, SGDClassifier
-# LogisticRegression_classifier = SklearnClassifier(LogisticRegression())
-# LogisticRegression_classifier.train(training_set)
-# print("LogisticRegression_classifier accuracy", (nltk.classify.accuracy(LogisticRegression_classifier, testing_set))*100)
 
 SGDClassifier_classifier = SklearnClassifier(SGDClassifier())
 SGDClassifier_classifier.train(training_set)
 print("SGDClassifier_classifier accuracy", (nltk.classify.accuracy(SGDClassifier_classifier, testing_set))*100)
 
-# SVC, LinearSVC, NuSVC
-SVC_classifier = SklearnClassifier(SVC())
-SVC_classifier.train(training_set)
-print("SVC_classifier accuracy", (nltk.classify.accuracy(SVC_classifier, testing_set))*100)
-
 LinearSVC_classifier = SklearnClassifier(LinearSVC())
 LinearSVC_classifier.train(training_set)
 print("LinearSVC_classifier accuracy", (nltk.classify.accuracy(LinearSVC_classifier, testing_set))*100)
-
-NuSVC_classifier = SklearnClassifier(NuSVC())
-NuSVC_classifier.train(training_set)
-print("NuSVC_classifier accuracy", (nltk.classify.accuracy(NuSVC_classifier, testing_set))*100)
 
 
 """
@@ -136,8 +117,7 @@ class VoteClassifier(ClassifierI):
         return conf
 
 
-voted_classifiers = VoteClassifier(classifier,MNB_classifier,BernoulliNB_classifier,
-                                   SGDClassifier_classifier,SVC_classifier,LinearSVC_classifier,
-                                   NuSVC_classifier)
+voted_classifiers = VoteClassifier(Naivebayes_classifier,MNB_classifier,BernoulliNB_classifier,
+                                   SGDClassifier_classifier,LinearSVC_classifier)
 print("voted_classifiers accuracy", (nltk.classify.accuracy(voted_classifiers, testing_set))*100)
 print("Classification:", voted_classifiers.classify(testing_set[0][0]), "Confidence {:f} %".format(voted_classifiers.confidence(testing_set[0][0])*100))
