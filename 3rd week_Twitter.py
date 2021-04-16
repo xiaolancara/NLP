@@ -11,8 +11,8 @@ from nltk.classify import ClassifierI
 from statistics import mode
 
 
-short_pos = open("Dataset//short_reviews/positive.txt","r",encoding='Windows-1252').read()
-short_neg = open("Dataset//short_reviews/negative.txt","r",encoding='Windows-1252').read()
+short_pos = open("Dataset/short_reviews/positive.txt","r",encoding='Windows-1252').read()
+short_neg = open("Dataset/short_reviews/negative.txt","r",encoding='Windows-1252').read()
 
 documents = []
 
